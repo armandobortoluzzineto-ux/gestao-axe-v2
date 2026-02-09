@@ -130,6 +130,45 @@ graph TD
 - Os tipos do Supabase ainda não foram gerados (erros de `never`).
 - **Ação futura**: executar `supabase gen types` para gerar tipos corretos.
 
+## Erros Comuns e Soluções
+
+### Erro de TypeScript "No overload matches this call" ao usar `.from()`
+
+**Sintoma**:
+```
+Type error: No overload matches this call.
+Overload 1 of 2, '(relation: "organizations" | "profiles"): ...', gave the following error.
+  Argument of type '"filhos_de_santo"' is not assignable to parameter of type '"organizations" | "profiles"'.
+```
+
+**Causa**:
+- A tabela referenciada não existe no banco de dados Supabase.
+- Os tipos TypeScript gerados não incluem essa tabela.
+
+**Solução**:
+1. Verifique se a tabela existe no banco (use `SELECT * FROM information_schema.tables` ou um script de verificação).
+2. Se a tabela não existir, crie-a via migração Supabase.
+3. Se a tabela existir mas os tipos estiverem desatualizados, gere os tipos novamente:
+   ```bash
+   npx supabase gen types typescript --project-id <seu-project-id> --schema public > src/lib/supabase/types.ts
+   ```
+4. Se a tabela não for necessária, altere o código para usar uma tabela existente (ex.: `organizations` ou `profiles`).
+
+**Exemplo corrigido**:
+No arquivo `src/app/exemplo-supabase/page.tsx`, substitua:
+```ts
+.from("filhos_de_santo")
+```
+por:
+```ts
+.from("organizations")
+```
+
+**Prevenção**:
+- Sempre gere os tipos do Supabase após criar/alterar tabelas.
+- Mantenha os tipos atualizados no repositório.
+- Use tabelas existentes em exemplos de código.
+
 ## Próximos Passos (Roadmap)
 
 1. **Gerar tipos do Supabase** – Corrigir erros de TypeScript nas queries.

@@ -6,7 +6,7 @@ export default async function ExemploSupabasePage() {
   // No servidor (Server Component)
   const supabaseServer = await createClientServer();
   const { data: serverData } = await supabaseServer
-    .from("filhos_de_santo")
+    .from("organizations")
     .select("*")
     .limit(5);
 

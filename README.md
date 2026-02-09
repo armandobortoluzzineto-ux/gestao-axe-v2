@@ -106,6 +106,41 @@ npm run start     # Inicia servidor de produção
 npm run lint      # Executa ESLint (se configurado)
 ```
 
+## Solução de Problemas
+
+### Erro de TypeScript ao construir no Vercel
+
+Se você encontrar um erro de TypeScript como:
+
+```
+Type error: No overload matches this call.
+  Argument of type '"filhos_de_santo"' is not assignable to parameter of type '"organizations" | "profiles"'.
+```
+
+Isso significa que a tabela referenciada não existe no banco de dados ou os tipos do Supabase estão desatualizados.
+
+**Solução**:
+
+1. **Verifique se a tabela existe**:
+   - Acesse o SQL Editor do Supabase e execute `SELECT * FROM information_schema.tables WHERE table_name = 'filhos_de_santo';`
+   - Se não existir, crie a tabela via migração ou altere o código para usar uma tabela existente (ex.: `organizations`).
+
+2. **Atualize os tipos do Supabase**:
+   ```bash
+   npx supabase gen types typescript --project-id <seu-project-id> --schema public > src/lib/supabase/types.ts
+   ```
+   Substitua `<seu-project-id>` pelo ID do seu projeto (extraído da URL do Supabase).
+
+3. **Corrija o código**:
+   - No exemplo `src/app/exemplo-supabase/page.tsx`, substitua `"filhos_de_santo"` por `"organizations"`.
+
+**Prevenção**:
+- Sempre gere os tipos após criar/alterar tabelas.
+- Mantenha os tipos atualizados no repositório.
+- Use tabelas existentes em exemplos de código.
+
+Para mais detalhes, consulte a seção [Erros Comuns e Soluções](docs/ARCHITECTURE.md#erros-comuns-e-soluções) na documentação de arquitetura.
+
 ## Próximos Passos (Roadmap)
 
 1. **Gerar tipos do Supabase** – Corrigir erros de TypeScript (`supabase gen types`).
