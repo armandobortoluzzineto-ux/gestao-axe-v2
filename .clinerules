@@ -1,0 +1,40 @@
+REGRA DE OURO: Toda alteração estrutural em banco de dados, lógica de autenticação ou design deve ser acompanhada da atualização dos arquivos em `/docs` e do `README.md`. Siga sempre o Design System: Roxo (#6D28D9), Dourado (#D97706), fontes Playfair Display e Inter.
+
+## Princípios de Implementação
+
+1. **Banco de Dados**
+   - Todas as tabelas devem incluir `organization_id` para isolamento multi‑tenant.
+   - RLS (Row Level Security) deve ser habilitada e testada.
+   - Migrações devem ser versionadas e aplicadas via Supabase CLI.
+
+2. **Autenticação & Autorização**
+   - Usar `@supabase/ssr` para clientes server‑side e browser‑side.
+   - Verificar `organization_id` no perfil do usuário antes de conceder acesso a recursos.
+   - Redirecionar usuários sem organização para `/onboarding`.
+
+3. **Design System (Misticismo Moderno)**
+   - **Cores Primárias:** Roxo Profundo (`#6D28D9`) para ações principais, Dourado (`#D97706`) para destaques.
+   - **Tipografia:** Playfair Display para títulos (`font-serif`), Inter para corpo (`font-sans`).
+   - **Espaçamento:** Usar escala do Tailwind (p‑6, gap‑6, mt‑8) para consistência.
+   - **Componentes:** Seguir os padrões do Shadcn UI, personalizando com as cores do tema.
+
+4. **Documentação**
+   - Atualizar `docs/ARCHITECTURE.md` com decisões de arquitetura.
+   - Manter `docs/DESIGN_SYSTEM.md` sincronizado com tokens visuais.
+   - `README.md` deve conter instruções claras de setup para novos desenvolvedores.
+
+5. **Fluxo de Usuário**
+   - Cadastro (`/signup`) → Login (`/login`) → Onboarding (`/onboarding`) → Dashboard (`/dashboard`).
+   - Usuários sem organização são redirecionados para onboarding.
+   - Organizações com status `pending` exibem tela de "Aguardando Aprovação".
+
+6. **Código**
+   - Preferir Server Components para lógica de autenticação e dados.
+   - Client Components apenas para interatividade (formulários, toggles).
+   - Usar `async/await` para operações assíncronas, tratar erros com `try/catch`.
+
+7. **Testes (Futuro)**
+   - Adicionar testes unitários para funções críticas.
+   - Testes de integração para fluxos de autenticação e multi‑tenancy.
+
+Esta regra é obrigatória para todos os colaboradores do projeto.

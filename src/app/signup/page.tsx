@@ -10,33 +10,47 @@ import { Label } from "@/components/ui/label";
 import { Toaster, toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 
-export default function LoginPage() {
+export default function SignupPage() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const supabase = createClient();
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      toast.error("Preencha email e senha");
+  const handleSignUp = async () => {
+    if (!name || !email || !password) {
+      toast.error("Preencha todos os campos");
       return;
     }
 
     setLoading(true);
-    console.log("Tentando login com:", email);
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          full_name: name,
+        },
+      },
     });
 
     if (error) {
-      console.error("Erro no login:", error);
-      toast.error("Erro no login: " + error.message);
+      toast.error("Erro no cadastro: " + error.message);
     } else {
-      console.log("Login bem-sucedido, dados:", data);
-      toast.success("Login realizado com sucesso!");
-      router.push("/dashboard");
+      // Verifica se o usuário precisa confirmar o email
+      if (data.user?.identities?.length === 0) {
+        toast.warning("Este email já está cadastrado. Tente fazer login.");
+      } else if (data.session) {
+        // Se já tem sessão (confirmação desativada), redireciona
+        toast.success("Cadastro realizado! Você já está logado.");
+        router.push("/dashboard");
+      } else {
+        // Precisa confirmar email
+        toast.success("Cadastro realizado! Verifique seu email para confirmar a conta.");
+        // Opcional: redirecionar para página de confirmação
+        // router.push("/confirm-email");
+      }
     }
     setLoading(false);
   };
@@ -47,13 +61,26 @@ export default function LoginPage() {
       <Card className="w-full max-w-md shadow-2xl border-primary/20 dark:border-primary/30">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl font-bold text-center font-serif text-purple-900 dark:text-purple-100">
-            Gestão Axé
+            Criar Conta
           </CardTitle>
           <CardDescription className="text-center text-gray-600 dark:text-gray-400">
-            Entre com suas credenciais para acessar o sistema
+            Preencha seus dados para começar a usar o Gestão Axé
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="name" className="text-gray-700 dark:text-gray-300">
+              Nome Completo
+            </Label>
+            <Input
+              id="name"
+              type="text"
+              placeholder="Seu nome"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              disabled={loading}
+            />
+          </div>
           <div className="space-y-2">
             <Label htmlFor="email" className="text-gray-700 dark:text-gray-300">
               Email
@@ -80,30 +107,33 @@ export default function LoginPage() {
               disabled={loading}
             />
           </div>
-          <div className="text-right">
-            <a
-              href="#"
-              className="text-sm text-purple-600 hover:text-purple-800 dark:text-purple-400 dark:hover:text-purple-300"
-            >
-              Esqueceu a senha?
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            Ao cadastrar, você concorda com nossos{" "}
+            <a href="#" className="text-purple-600 hover:underline dark:text-purple-400">
+              Termos de Uso
+            </a>{" "}
+            e{" "}
+            <a href="#" className="text-purple-600 hover:underline dark:text-purple-400">
+              Política de Privacidade
             </a>
-          </div>
+            .
+          </p>
         </CardContent>
         <CardFooter className="flex flex-col space-y-3">
           <Button
             className="w-full"
-            onClick={handleLogin}
+            onClick={handleSignUp}
             disabled={loading}
           >
-            {loading ? "Entrando..." : "Entrar"}
+            {loading ? "Criando conta..." : "Criar Conta"}
           </Button>
           <div className="text-center text-sm text-gray-600 dark:text-gray-400">
-            Não tem uma conta?{" "}
+            Já tem uma conta?{" "}
             <Link
-              href="/signup"
+              href="/login"
               className="font-semibold text-purple-600 hover:text-purple-800 dark:text-purple-400 dark:hover:text-purple-300"
             >
-              Cadastre-se
+              Faça login
             </Link>
           </div>
         </CardFooter>

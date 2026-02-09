@@ -1,46 +1,101 @@
-# Gestão Axé 2.0
+# Gestão Axé 2.0 – SaaS Multi‑tenant
 
-Sistema de gestão para comunidades religiosas – construído com Next.js 14+, TypeScript, Tailwind CSS, Shadcn UI e PWA.
+Sistema de gestão para comunidades religiosas, escalado para um modelo SaaS multi‑tenant com isolamento de dados por organização.
 
 ## Stack Tecnológica
 
 - **Framework**: Next.js 14+ (App Router)
 - **Linguagem**: TypeScript
-- **Estilização**: Tailwind CSS v4
-- **Componentes**: Shadcn UI (tema Slate)
+- **Estilização**: Tailwind CSS v4 + Design System “Misticismo Moderno”
+- **Componentes**: Shadcn UI (customizado com tema roxo/dourado)
+- **Banco de Dados**: Supabase (PostgreSQL + Auth + RLS)
 - **PWA**: @ducanh2912/next-pwa (desativado em desenvolvimento)
-- **Ícones**: Lucide React (pronto para uso)
+- **Ícones**: Lucide React
 
-## Configurações Realizadas
+## Funcionalidades Implementadas
 
-1. **Next.js** criado com:
-   - TypeScript
-   - Tailwind CSS
-   - App Router
-   - src directory
-   - Import alias `@/*`
+### 1. Autenticação Multi‑tenant
+- Cadastro separado (`/signup`) com nome, email e senha.
+- Login dedicado (`/login`) com redirecionamento para dashboard.
+- Autenticação via Supabase Auth com sessão server‑side e client‑side.
 
-2. **Shadcn UI** inicializado com tema **Slate**:
-   - `components.json` configurado
-   - Utils em `src/lib/utils.ts`
-   - CSS variables atualizadas em `src/app/globals.css`
+### 2. Onboarding Guiado
+- Barreira automática no dashboard: usuários sem `organization_id` são redirecionados para `/onboarding`.
+- Wizard de 3 passos:
+  1. Informações da organização (nome, descrição, setor).
+  2. Configuração (plano, número de usuários).
+  3. Confirmação e criação.
+- Integração com Supabase: cria organização e atualiza perfil do usuário com `organization_id` e `role='owner'`.
 
-3. **PWA** configurado em `next.config.ts`:
-   - Plugin `@ducanh2912/next-pwa`
-   - Desabilitado em `NODE_ENV === "development"`
-   - Destino: `public`
-   - Registro automático
+### 3. Design System “Misticismo Moderno”
+- **Cores Primárias**: Roxo profundo (`#6D28D9`) para ações principais, Dourado (`#D97706`) para destaques.
+- **Tipografia**: Playfair Display (`font-serif`) para títulos, Inter (`font-sans`) para corpo.
+- **Componentes**: Botões, cards, inputs e selects estilizados com as variáveis CSS do tema.
+- **Consistência**: Todas as páginas (login, signup, onboarding, dashboard) seguem o mesmo padrão visual.
 
-4. **Manifest** básico em `public/manifest.json`:
-   - Nome: "Gestão Axé"
-   - Tema: `#ffffff`
-   - Display: `standalone`
-   - Ícones placeholder (192x192, 512x512)
+### 4. Arquitetura SaaS
+- Banco de dados com tabelas `organizations` e `profiles`.
+- Row Level Security (RLS) habilitada para isolamento de dados por `organization_id`.
+- Migração SQL versionada (`supabase/migrations/20260209212041_setup_saas_multi_tenant.sql`).
+- Fluxo completo: signup → login → onboarding → dashboard.
 
-5. **Página inicial** limpa:
-   - Título "Gestão Axé 2.0 - Em Construção"
-   - Design gradiente com Slate
-   - Indicador de progresso
+## Estrutura do Projeto
+
+```
+gestao-axe-v2/
+├── src/app/
+│   ├── signup/page.tsx          # Página de cadastro
+│   ├── login/page.tsx           # Página de login
+│   ├── onboarding/page.tsx      # Wizard de onboarding (3 passos)
+│   ├── dashboard/
+│   │   ├── layout.tsx           # Layout com barreira de onboarding
+│   │   └── page.tsx             # Dashboard principal (a desenvolver)
+│   ├── layout.tsx               # Layout raiz (fontes e tema)
+│   └── globals.css              # Variáveis CSS do Design System
+├── src/components/ui/           # Componentes Shadcn UI (button, card, input, etc.)
+├── src/lib/supabase/            # Clientes Supabase (server, client, types)
+├── supabase/migrations/         # Migrações do banco de dados
+├── docs/
+│   ├── ARCHITECTURE.md          # Documentação da arquitetura SaaS
+│   └── DESIGN_SYSTEM.md         # Especificações do Design System
+└── .clinerules                  # Regras de implementação (golden rule)
+```
+
+## Configuração para Desenvolvimento
+
+### Pré‑requisitos
+- Node.js 18+
+- Conta no Supabase (https://supabase.com)
+
+### Passos
+
+1. **Clone o repositório**
+   ```bash
+   git clone <repo>
+   cd gestao-axe-v2
+   ```
+
+2. **Instale as dependências**
+   ```bash
+   npm install
+   ```
+
+3. **Configure as variáveis de ambiente**
+   Crie um arquivo `.env.local` com:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=sua-chave-anon
+   ```
+
+4. **Execute as migrações no Supabase**
+   - Acesse o SQL Editor do seu projeto Supabase.
+   - Copie o conteúdo de `supabase/migrations/20260209212041_setup_saas_multi_tenant.sql` e execute.
+
+5. **Inicie o servidor de desenvolvimento**
+   ```bash
+   npm run dev
+   ```
+   Acesse `http://localhost:3000`.
 
 ## Scripts Disponíveis
 
@@ -51,42 +106,19 @@ npm run start     # Inicia servidor de produção
 npm run lint      # Executa ESLint (se configurado)
 ```
 
-## Próximos Passos Recomendados
+## Próximos Passos (Roadmap)
 
-1. **Adicionar componentes Shadcn UI**:
-   ```bash
-   npx shadcn@latest add button
-   npx shadcn@latest add card
-   npx shadcn@latest add dialog
-   ```
+1. **Gerar tipos do Supabase** – Corrigir erros de TypeScript (`supabase gen types`).
+2. **Desenvolver dashboard** – Criar widgets e funcionalidades específicas por organização.
+3. **Implementar CRUD de entidades** – Filhos de santo, consultas, contribuições.
+4. **Adicionar testes** – Unitários e de integração para fluxos críticos.
+5. **Configurar deploy automatizado** – Vercel com variáveis de ambiente.
 
-2. **Configurar ícones reais**:
-   - Substituir `/icon-192.png` e `/icon-512.png` em `public/`
-   - Gerar favicon e apple-touch-icon
+## Documentação Relacionada
 
-3. **Configurar ambiente Supabase**:
-   - Criar projeto em [supabase.com](https://supabase.com)
-   - Adicionar variáveis `.env.local`
-   - Instalar `@supabase/supabase-js`
-
-4. **Implementar autenticação**:
-   - Usar NextAuth.js ou Supabase Auth
-   - Criar páginas de login/proteção
-
-5. **Desenvolver funcionalidades**:
-   - Cadastro de Filhos de Santo
-   - Agendamento de Consultas
-   - Gestão de Mensalidades/Contribuições
-   - Dashboard administrativo
-
-## Regras do Projeto
-
-Consulte o arquivo [.clinerules](.clinerules) para diretrizes críticas sobre:
-- Preservação do sistema atual
-- Padrões Supabase & RLS
-- Comportamento do Roo Code
-- Contexto religioso e de negócio
-- Integração Vercel
+- [Arquitetura SaaS](docs/ARCHITECTURE.md) – Detalhes técnicos da implementação multi‑tenant.
+- [Design System](docs/DESIGN_SYSTEM.md) – Paleta, tipografia e componentes.
+- [Regras do Projeto](.clinerules) – Diretrizes críticas para desenvolvimento.
 
 ## Licença
 

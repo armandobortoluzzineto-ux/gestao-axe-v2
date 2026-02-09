@@ -9,11 +9,36 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const supabase = await createClientServer();
-  const { data: { session } } = await supabase.auth.getSession();
-
-  if (!session) {
+  
+  // Obter usuário autenticado (mais seguro que session.user)
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
+  
+  if (!user) {
     redirect("/login");
   }
+
+  // Buscar perfil do usuário
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("organization_id, role")
+    .eq("id", user.id)
+    .single();
+
+  // Se não tiver organização, redirecionar para onboarding
+  if (!profile || !profile.organization_id) {
+    redirect("/onboarding");
+  }
+
+  // Se a organização estiver com status "pending", podemos mostrar uma tela de espera
+  // (opcional, futuramente)
+  // const { data: organization } = await supabase
+  //   .from("organizations")
+  //   .select("status")
+  //   .eq("id", profile.organization_id)
+  //   .single();
+  // if (organization?.status === "pending") {
+  //   redirect("/waiting-approval");
+  // }
 
   return (
     <div className="flex min-h-screen bg-slate-50">
