@@ -50,39 +50,48 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-background px-6 py-4 shadow-sm">
-      <div className="flex items-center gap-4">
-        <button className="lg:hidden p-2 rounded-md hover:bg-muted">
+    <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border bg-background px-4 sm:px-6 py-3 sm:py-4 shadow-sm">
+      <div className="flex items-center gap-3">
+        <button
+          className="lg:hidden p-2 rounded-md hover:bg-muted transition-colors"
+          onClick={() => {
+            // TODO: Implementar drawer mobile
+            toast.info("Menu mobile em desenvolvimento");
+          }}
+        >
           <Menu className="h-5 w-5 text-foreground" />
         </button>
         <div>
-          <h2 className="text-xl font-semibold font-serif text-foreground">Dashboard</h2>
-          <p className="text-sm text-muted-foreground">Bem-vindo de volta, {userName}</p>
+          <h2 className="text-lg sm:text-xl font-semibold font-serif text-foreground">Dashboard</h2>
+          <p className="text-xs sm:text-sm text-muted-foreground">Bem-vindo de volta, {userName}</p>
         </div>
       </div>
 
-      <div className="flex items-center gap-4">
-        <div className="hidden md:flex items-center gap-3 text-sm text-foreground">
-          <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
+      <div className="flex items-center gap-3">
+        {/* Avatar e nome visíveis em tablets+ */}
+        <div className="hidden sm:flex items-center gap-3 text-sm text-foreground">
+          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
             {loading ? (
-              <User className="h-4 w-4 text-primary" />
+              <User className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
             ) : (
-              <span className="font-bold text-primary">{userInitial}</span>
+              <span className="font-bold text-primary text-sm sm:text-base">{userInitial}</span>
             )}
           </div>
-          <div className="flex flex-col">
+          <div className="hidden md:flex flex-col">
             <span className="font-medium">{userName}</span>
             <span className="text-xs text-muted-foreground">Administrador</span>
           </div>
         </div>
+        
+        {/* Botão de logout adaptado para mobile */}
         <Button
           variant="outline"
           size="sm"
           onClick={handleLogout}
-          className="flex items-center gap-2"
+          className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
         >
-          <LogOut className="h-4 w-4" />
-          Sair
+          <LogOut className="h-3 w-3 sm:h-4 sm:w-4" />
+          <span className="hidden xs:inline">Sair</span>
         </Button>
       </div>
     </header>

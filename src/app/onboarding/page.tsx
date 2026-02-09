@@ -120,22 +120,22 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-4">
-      <Toaster richColors position="top-right" />
-      <Card className="w-full max-w-2xl shadow-2xl border-primary/20 dark:border-primary/30">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-3xl font-bold text-center font-serif text-purple-900 dark:text-purple-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-3 sm:p-4 md:p-6">
+      <Toaster richColors position="top-center" />
+      <Card className="w-full max-w-lg sm:max-w-2xl shadow-2xl border-primary/20 dark:border-primary/30">
+        <CardHeader className="space-y-1 p-4 sm:p-6">
+          <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-center font-serif text-primary">
             Cadastro do Terreiro
           </CardTitle>
-          <CardDescription className="text-center text-gray-600 dark:text-gray-400">
+          <CardDescription className="text-center text-muted-foreground text-sm sm:text-base">
             Preencha as informações básicas do seu terreiro para começar a usar o Gestão Axé
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-4">
+        <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6">
+          <div className="space-y-3 sm:space-y-4">
             {/* Nome do Terreiro */}
-            <div className="space-y-2">
-              <Label htmlFor="nomeTerreiro" className="text-gray-700 dark:text-gray-300">
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="nomeTerreiro" className="text-foreground text-sm sm:text-base">
                 Nome do Terreiro *
               </Label>
               <Input
@@ -144,15 +144,16 @@ export default function OnboardingPage() {
                 value={nomeTerreiro}
                 onChange={(e) => setNomeTerreiro(e.target.value)}
                 disabled={loading}
+                className="text-sm sm:text-base"
               />
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Nome público da casa (aparecerá no sistema)
               </p>
             </div>
 
             {/* Dirigente */}
-            <div className="space-y-2">
-              <Label htmlFor="dirigente" className="text-gray-700 dark:text-gray-300">
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="dirigente" className="text-foreground text-sm sm:text-base">
                 Dirigente *
               </Label>
               <Input
@@ -160,10 +161,10 @@ export default function OnboardingPage() {
                 placeholder="Ex: Pai João de Oxóssi"
                 value={dirigente}
                 readOnly
-                className="bg-gray-50 dark:bg-gray-800 cursor-not-allowed"
+                className="bg-muted cursor-not-allowed text-sm sm:text-base"
                 disabled={loading}
               />
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Nome do Pai, Mãe ou Dirigente espiritual responsável (pré‑preenchido com seu nome)
                 {userFullName && (
                   <span className="ml-1 text-primary font-semibold">({userFullName})</span>
@@ -172,8 +173,8 @@ export default function OnboardingPage() {
             </div>
 
             {/* Data de Fundação */}
-            <div className="space-y-2">
-              <Label htmlFor="dataFundacao" className="text-gray-700 dark:text-gray-300">
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="dataFundacao" className="text-foreground text-sm sm:text-base">
                 Data de Fundação (opcional)
               </Label>
               <Input
@@ -182,15 +183,16 @@ export default function OnboardingPage() {
                 value={dataFundacao}
                 onChange={(e) => setDataFundacao(e.target.value)}
                 disabled={loading}
+                className="text-sm sm:text-base"
               />
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Data em que o terreiro foi fundado
               </p>
             </div>
 
             {/* Endereço Completo */}
-            <div className="space-y-2">
-              <Label htmlFor="enderecoCompleto" className="text-gray-700 dark:text-gray-300">
+            <div className="space-y-1.5 sm:space-y-2">
+              <Label htmlFor="enderecoCompleto" className="text-foreground text-sm sm:text-base">
                 Endereço Completo *
               </Label>
               <Input
@@ -199,33 +201,37 @@ export default function OnboardingPage() {
                 value={enderecoCompleto}
                 onChange={(e) => setEnderecoCompleto(e.target.value)}
                 disabled={loading}
+                className="text-sm sm:text-base"
               />
-              <p className="text-sm text-gray-500 dark:text-gray-400">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Endereço físico completo do terreiro
               </p>
             </div>
           </div>
 
           {/* Resumo */}
-          <div className="p-4 bg-primary/10 dark:bg-primary/20 rounded-lg">
-            <h4 className="font-semibold text-primary dark:text-primary-foreground mb-2">Resumo</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="p-3 sm:p-4 bg-primary/10 dark:bg-primary/20 rounded-lg">
+            <h4 className="font-semibold text-primary dark:text-primary-foreground mb-1 sm:mb-2 text-sm sm:text-base">Resumo</h4>
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Você está cadastrando o terreiro <strong>{nomeTerreiro || "(sem nome)"}</strong> sob a direção de <strong>{dirigente || "(sem dirigente)"}</strong>.
               {dataFundacao && ` Fundado em ${new Date(dataFundacao).toLocaleDateString('pt-BR')}.`}
             </p>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between pt-6">
+        <CardFooter className="flex flex-col sm:flex-row justify-between gap-3 pt-4 sm:pt-6 p-4 sm:p-6">
           <Button
             variant="outline"
             onClick={() => router.back()}
             disabled={loading}
+            className="w-full sm:w-auto order-2 sm:order-1"
           >
             Voltar
           </Button>
           <Button
             onClick={handleSubmit}
             disabled={loading}
+            className="w-full sm:w-auto order-1 sm:order-2"
+            size="lg"
           >
             {loading ? (
               <>

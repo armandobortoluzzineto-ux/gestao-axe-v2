@@ -75,10 +75,35 @@ Usar o componente `Card` do Shadcn UI com `bg-card` e `border-border`.
 - **Margem entre seções:** `mt-8` ou `gap-6` em grids.
 - **Evitar poluição visual:** usar bastante espaço em branco, especialmente em telas administrativas.
 
-### Responsividade
-- Sidebar fixa à esquerda apenas em desktop (`lg:block`).
-- Em mobile, a sidebar é ocultada (menu hambúrguer futuro).
-- Grids devem ser `grid-cols-1 md:grid-cols-2 lg:grid-cols-3` conforme necessário.
+### Responsividade (Mobile First)
+A aplicação segue a abordagem **mobile first**, desenvolvendo primeiro para telas pequenas e depois adaptando para telas maiores.
+
+#### Breakpoints definidos no tema:
+- **sm:** 40rem (640px) – Telefones grandes / tablets pequenos
+- **md:** 48rem (768px) – Tablets
+- **lg:** 64rem (1024px) – Laptops / desktops pequenos
+- **xl:** 80rem (1280px) – Desktops
+- **2xl:** 96rem (1536px) – Telas grandes
+
+#### Padrões de implementação:
+1. **Layout principal:**
+   - Em mobile: conteúdo em coluna única, padding reduzido (`p-4`)
+   - Em desktop: sidebar fixa à esquerda (`lg:block`), conteúdo principal expandido
+   
+2. **Componentes adaptativos:**
+   - Use classes responsivas: `text-sm sm:text-base`, `p-4 sm:p-6`
+   - Sidebar mobile: ocultada por padrão, acessível via menu hambúrguer
+   - Header mobile: botões compactos, texto ajustado
+   
+3. **Grids responsivos:**
+   ```tsx
+   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+   ```
+
+4. **Formulários mobile-friendly:**
+   - Labels e inputs com tamanhos de fonte adaptativos
+   - Botões com padding adequado para toque
+   - Espaçamento vertical suficiente entre campos
 
 ---
 

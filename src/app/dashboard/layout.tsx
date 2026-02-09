@@ -41,16 +41,16 @@ export default async function DashboardLayout({
   // }
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
-      {/* Sidebar fixa para desktop */}
-      <aside className="hidden lg:block w-64 border-r border-slate-200 bg-white">
+    <div className="flex min-h-screen bg-background">
+      {/* Sidebar mobile como drawer, desktop como fixa */}
+      <aside className="hidden lg:block w-64 border-r border-border bg-sidebar">
         <Sidebar />
       </aside>
 
       {/* Conteúdo principal */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col w-full">
         <Header />
-        <main className="flex-1 p-6 md:p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">
           {children}
         </main>
       </div>
