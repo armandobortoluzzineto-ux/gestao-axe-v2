@@ -1,4 +1,5 @@
-import { createClientServer, createClientBrowser } from "@/lib/supabase";
+import { createClient as createClientBrowser } from "@/lib/supabase/client";
+import { createClient as createClientServer } from "@/lib/supabase/server";
 
 // Exemplo de componente que usa Supabase no servidor e no cliente
 export default async function ExemploSupabasePage() {
