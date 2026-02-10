@@ -1,11 +1,12 @@
 "use client";
 
-import { LogOut, Menu, User } from "lucide-react";
+import { LogOut, Menu, User, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
+import Sidebar from "./sidebar";
 
 export default function Header() {
   const router = useRouter();
@@ -39,6 +40,8 @@ export default function Header() {
     loadUser();
   }, [supabase.auth]);
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
@@ -49,51 +52,76 @@ export default function Header() {
     }
   };
 
-  return (
-    <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border bg-background px-4 sm:px-6 py-3 sm:py-4 shadow-sm">
-      <div className="flex items-center gap-3">
-        <button
-          className="lg:hidden p-2 rounded-md hover:bg-muted transition-colors"
-          onClick={() => {
-            // TODO: Implementar drawer mobile
-            toast.info("Menu mobile em desenvolvimento");
-          }}
-        >
-          <Menu className="h-5 w-5 text-foreground" />
-        </button>
-        <div>
-          <h2 className="text-lg sm:text-xl font-semibold font-serif text-foreground">Dashboard</h2>
-          <p className="text-xs sm:text-sm text-muted-foreground">Bem-vindo de volta, {userName}</p>
-        </div>
-      </div>
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
-      <div className="flex items-center gap-3">
-        {/* Avatar e nome visíveis em tablets+ */}
-        <div className="hidden sm:flex items-center gap-3 text-sm text-foreground">
-          <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
-            {loading ? (
-              <User className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
-            ) : (
-              <span className="font-bold text-primary text-sm sm:text-base">{userInitial}</span>
-            )}
-          </div>
-          <div className="hidden md:flex flex-col">
-            <span className="font-medium">{userName}</span>
-            <span className="text-xs text-muted-foreground">Administrador</span>
+  return (
+    <>
+      <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border bg-background px-4 sm:px-6 py-3 sm:py-4 shadow-sm">
+        <div className="flex items-center gap-3">
+          <button
+            className="lg:hidden p-2 rounded-md hover:bg-muted transition-colors"
+            onClick={toggleSidebar}
+          >
+            <Menu className="h-5 w-5 text-foreground" />
+          </button>
+          <div>
+            <h2 className="text-lg sm:text-xl font-semibold font-serif text-foreground">Dashboard</h2>
+            <p className="text-xs sm:text-sm text-muted-foreground">Bem-vindo de volta, {userName}</p>
           </div>
         </div>
-        
-        {/* Botão de logout adaptado para mobile */}
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={handleLogout}
-          className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
-        >
-          <LogOut className="h-3 w-3 sm:h-4 sm:w-4" />
-          <span className="hidden xs:inline">Sair</span>
-        </Button>
-      </div>
-    </header>
+
+        <div className="flex items-center gap-3">
+          {/* Avatar e nome visíveis em tablets+ */}
+          <div className="hidden sm:flex items-center gap-3 text-sm text-foreground">
+            <div className="h-8 w-8 sm:h-9 sm:w-9 rounded-full bg-primary/10 flex items-center justify-center border border-primary/20">
+              {loading ? (
+                <User className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
+              ) : (
+                <span className="font-bold text-primary text-sm sm:text-base">{userInitial}</span>
+              )}
+            </div>
+            <div className="hidden md:flex flex-col">
+              <span className="font-medium">{userName}</span>
+              <span className="text-xs text-muted-foreground">Administrador</span>
+            </div>
+          </div>
+          
+          {/* Botão de logout adaptado para mobile */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleLogout}
+            className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm"
+          >
+            <LogOut className="h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden xs:inline">Sair</span>
+          </Button>
+        </div>
+      </header>
+
+      {/* Mobile sidebar overlay */}
+      {isSidebarOpen && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            onClick={toggleSidebar}
+          />
+          <div className="fixed inset-y-0 left-0 w-64 max-w-[80%] bg-sidebar border-r border-border z-50 lg:hidden overflow-y-auto">
+            <div className="flex items-center justify-between p-4 border-b border-border">
+              <h2 className="text-lg font-bold font-serif">Menu</h2>
+              <button
+                onClick={toggleSidebar}
+                className="p-2 rounded-md hover:bg-muted"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <Sidebar />
+          </div>
+        </>
+      )}
+    </>
   );
 }

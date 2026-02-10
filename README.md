@@ -106,6 +106,24 @@ npm run start     # Inicia servidor de produção
 npm run lint      # Executa ESLint (se configurado)
 ```
 
+## Acessibilidade Mobile
+
+O sistema agora inclui um menu lateral responsivo que se adapta a dispositivos móveis:
+
+- **Desktop (> 1024px)**: Sidebar fixa à esquerda.
+- **Mobile (< 1024px)**: Sidebar oculta; um botão de hambúrguer no header permite abrir um drawer sobreposto.
+
+**Funcionalidades implementadas**:
+- Botão de menu no header visível apenas em mobile.
+- Drawer com overlay que pode ser fechado tocando fora ou no botão "X".
+- Navegação completa entre as páginas do dashboard (Início, Membros, Eventos, Financeiro, Configurações).
+- Estado de drawer gerenciado localmente no componente Header.
+
+**Como usar**:
+1. Em uma tela pequena, clique no ícone de menu (três linhas) no canto superior esquerdo.
+2. O drawer abrirá com as opções de navegação.
+3. Toque em qualquer opção para navegar ou toque fora do drawer para fechar.
+
 ## Solução de Problemas
 
 ### Erro de TypeScript ao construir no Vercel
