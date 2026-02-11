@@ -120,22 +120,22 @@ export default function OnboardingPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-3 sm:p-4 md:p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-2 xs:p-3 sm:p-4 md:p-6">
       <Toaster richColors position="top-center" />
-      <Card className="w-full max-w-lg sm:max-w-2xl shadow-2xl border-primary/20 dark:border-primary/30">
-        <CardHeader className="space-y-1 p-4 sm:p-6">
-          <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold text-center font-serif text-primary">
+      <Card className="w-full max-w-md xs:max-w-lg sm:max-w-xl md:max-w-2xl shadow-2xl border-primary/20 dark:border-primary/30">
+        <CardHeader className="space-y-1 p-3 sm:p-4 md:p-6">
+          <CardTitle className="text-lg xs:text-xl sm:text-2xl md:text-3xl font-bold text-center font-serif text-primary">
             Cadastro do Terreiro
           </CardTitle>
-          <CardDescription className="text-center text-muted-foreground text-sm sm:text-base">
+          <CardDescription className="text-center text-muted-foreground text-xs xs:text-sm sm:text-base">
             Preencha as informações básicas do seu terreiro para começar a usar o Gestão Axé
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-4 sm:space-y-6 p-4 sm:p-6">
-          <div className="space-y-3 sm:space-y-4">
+        <CardContent className="space-y-3 sm:space-y-4 md:space-y-6 p-3 sm:p-4 md:p-6">
+          <div className="space-y-2.5 sm:space-y-3 md:space-y-4">
             {/* Nome do Terreiro */}
-            <div className="space-y-1.5 sm:space-y-2">
-              <Label htmlFor="nomeTerreiro" className="text-foreground text-sm sm:text-base">
+            <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
+              <Label htmlFor="nomeTerreiro" className="text-foreground text-xs xs:text-sm sm:text-base">
                 Nome do Terreiro *
               </Label>
               <Input
@@ -144,16 +144,16 @@ export default function OnboardingPage() {
                 value={nomeTerreiro}
                 onChange={(e) => setNomeTerreiro(e.target.value)}
                 disabled={loading}
-                className="text-sm sm:text-base"
+                className="text-xs xs:text-sm sm:text-base min-h-[44px]"
               />
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs xs:text-sm text-muted-foreground pt-1">
                 Nome público da casa (aparecerá no sistema)
               </p>
             </div>
 
             {/* Dirigente */}
-            <div className="space-y-1.5 sm:space-y-2">
-              <Label htmlFor="dirigente" className="text-foreground text-sm sm:text-base">
+            <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
+              <Label htmlFor="dirigente" className="text-foreground text-xs xs:text-sm sm:text-base">
                 Dirigente *
               </Label>
               <Input
@@ -161,10 +161,10 @@ export default function OnboardingPage() {
                 placeholder="Ex: Pai João de Oxóssi"
                 value={dirigente}
                 readOnly
-                className="bg-muted cursor-not-allowed text-sm sm:text-base"
+                className="bg-muted cursor-not-allowed text-xs xs:text-sm sm:text-base min-h-[44px]"
                 disabled={loading}
               />
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs xs:text-sm text-muted-foreground pt-1">
                 Nome do Pai, Mãe ou Dirigente espiritual responsável (pré‑preenchido com seu nome)
                 {userFullName && (
                   <span className="ml-1 text-primary font-semibold">({userFullName})</span>
@@ -173,8 +173,8 @@ export default function OnboardingPage() {
             </div>
 
             {/* Data de Fundação */}
-            <div className="space-y-1.5 sm:space-y-2">
-              <Label htmlFor="dataFundacao" className="text-foreground text-sm sm:text-base">
+            <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
+              <Label htmlFor="dataFundacao" className="text-foreground text-xs xs:text-sm sm:text-base">
                 Data de Fundação (opcional)
               </Label>
               <Input
@@ -183,16 +183,16 @@ export default function OnboardingPage() {
                 value={dataFundacao}
                 onChange={(e) => setDataFundacao(e.target.value)}
                 disabled={loading}
-                className="text-sm sm:text-base"
+                className="text-xs xs:text-sm sm:text-base min-h-[44px]"
               />
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs xs:text-sm text-muted-foreground pt-1">
                 Data em que o terreiro foi fundado
               </p>
             </div>
 
             {/* Endereço Completo */}
-            <div className="space-y-1.5 sm:space-y-2">
-              <Label htmlFor="enderecoCompleto" className="text-foreground text-sm sm:text-base">
+            <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
+              <Label htmlFor="enderecoCompleto" className="text-foreground text-xs xs:text-sm sm:text-base">
                 Endereço Completo *
               </Label>
               <Input
@@ -201,41 +201,41 @@ export default function OnboardingPage() {
                 value={enderecoCompleto}
                 onChange={(e) => setEnderecoCompleto(e.target.value)}
                 disabled={loading}
-                className="text-sm sm:text-base"
+                className="text-xs xs:text-sm sm:text-base min-h-[44px]"
               />
-              <p className="text-xs sm:text-sm text-muted-foreground">
+              <p className="text-xs xs:text-sm text-muted-foreground pt-1">
                 Endereço físico completo do terreiro
               </p>
             </div>
           </div>
 
           {/* Resumo */}
-          <div className="p-3 sm:p-4 bg-primary/10 dark:bg-primary/20 rounded-lg">
-            <h4 className="font-semibold text-primary dark:text-primary-foreground mb-1 sm:mb-2 text-sm sm:text-base">Resumo</h4>
-            <p className="text-xs sm:text-sm text-muted-foreground">
+          <div className="p-2.5 xs:p-3 sm:p-4 bg-primary/10 dark:bg-primary/20 rounded-lg mt-3 sm:mt-4">
+            <h4 className="font-semibold text-primary dark:text-primary-foreground mb-1 sm:mb-2 text-xs xs:text-sm sm:text-base">Resumo</h4>
+            <p className="text-xs xs:text-sm text-muted-foreground">
               Você está cadastrando o terreiro <strong>{nomeTerreiro || "(sem nome)"}</strong> sob a direção de <strong>{dirigente || "(sem dirigente)"}</strong>.
               {dataFundacao && ` Fundado em ${new Date(dataFundacao).toLocaleDateString('pt-BR')}.`}
             </p>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col sm:flex-row justify-between gap-3 pt-4 sm:pt-6 p-4 sm:p-6">
+        <CardFooter className="flex flex-col sm:flex-row justify-between gap-2 xs:gap-3 pt-3 sm:pt-4 md:pt-6 p-3 sm:p-4 md:p-6">
           <Button
             variant="outline"
             onClick={() => router.back()}
             disabled={loading}
-            className="w-full sm:w-auto order-2 sm:order-1"
+            className="w-full sm:w-auto order-2 sm:order-1 min-h-[44px] text-xs xs:text-sm"
           >
             Voltar
           </Button>
           <Button
             onClick={handleSubmit}
             disabled={loading}
-            className="w-full sm:w-auto order-1 sm:order-2"
+            className="w-full sm:w-auto order-1 sm:order-2 min-h-[44px] text-xs xs:text-sm"
             size="lg"
           >
             {loading ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                <Loader2 className="mr-2 h-3 w-3 xs:h-4 xs:w-4 animate-spin" />
                 Cadastrando...
               </>
             ) : (

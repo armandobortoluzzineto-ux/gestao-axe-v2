@@ -42,20 +42,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-3 sm:p-4 md:p-6">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted p-2 xs:p-3 sm:p-4 md:p-6">
       <Toaster richColors position="top-center" />
-      <Card className="w-full max-w-sm sm:max-w-md shadow-2xl border-primary/20 dark:border-primary/30">
-        <CardHeader className="space-y-1 p-4 sm:p-6">
-          <CardTitle className="text-xl sm:text-2xl font-bold text-center font-serif text-primary">
+      <Card className="w-full max-w-xs xs:max-w-sm sm:max-w-md shadow-2xl border-primary/20 dark:border-primary/30">
+        <CardHeader className="space-y-1 p-3 sm:p-4 md:p-6">
+          <CardTitle className="text-lg xs:text-xl sm:text-2xl font-bold text-center font-serif text-primary">
             Gestão Axé
           </CardTitle>
-          <CardDescription className="text-center text-muted-foreground text-sm sm:text-base">
+          <CardDescription className="text-center text-muted-foreground text-xs xs:text-sm sm:text-base">
             Entre com suas credenciais para acessar o sistema
           </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-3 sm:space-y-4 p-4 sm:p-6">
-          <div className="space-y-1.5 sm:space-y-2">
-            <Label htmlFor="email" className="text-foreground text-sm sm:text-base">
+        <CardContent className="space-y-2.5 sm:space-y-3 md:space-y-4 p-3 sm:p-4 md:p-6">
+          <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
+            <Label htmlFor="email" className="text-foreground text-xs xs:text-sm sm:text-base">
               Email
             </Label>
             <Input
@@ -65,11 +65,11 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={loading}
-              className="text-sm sm:text-base"
+              className="text-xs xs:text-sm sm:text-base min-h-[44px]"
             />
           </div>
-          <div className="space-y-1.5 sm:space-y-2">
-            <Label htmlFor="password" className="text-foreground text-sm sm:text-base">
+          <div className="space-y-1 xs:space-y-1.5 sm:space-y-2">
+            <Label htmlFor="password" className="text-foreground text-xs xs:text-sm sm:text-base">
               Senha
             </Label>
             <Input
@@ -79,28 +79,28 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               disabled={loading}
-              className="text-sm sm:text-base"
+              className="text-xs xs:text-sm sm:text-base min-h-[44px]"
             />
           </div>
-          <div className="text-right">
+          <div className="text-right pt-1">
             <a
               href="#"
-              className="text-xs sm:text-sm text-primary hover:text-primary/80"
+              className="text-xs xs:text-sm text-primary hover:text-primary/80"
             >
               Esqueceu a senha?
             </a>
           </div>
         </CardContent>
-        <CardFooter className="flex flex-col space-y-2 sm:space-y-3 p-4 sm:p-6 pt-0">
+        <CardFooter className="flex flex-col space-y-2 sm:space-y-3 p-3 sm:p-4 md:p-6 pt-0">
           <Button
-            className="w-full text-sm sm:text-base"
+            className="w-full text-xs xs:text-sm sm:text-base min-h-[44px]"
             onClick={handleLogin}
             disabled={loading}
             size="lg"
           >
             {loading ? "Entrando..." : "Entrar"}
           </Button>
-          <div className="text-center text-sm text-muted-foreground">
+          <div className="text-center text-xs xs:text-sm text-muted-foreground pt-1">
             Não tem uma conta?{" "}
             <Link
               href="/signup"

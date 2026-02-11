@@ -57,69 +57,139 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.488 0.243 302.717); /* Roxo Axé #6D28D9 */
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896); /* Slate-200 */
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.627 0.194 58.318); /* Dourado #D97706 */
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.488 0.243 302.717);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --background: #0B0E14; /* Azul Petróleo quase preto - Fundo da Página */
+  --foreground: #F9F9F9; /* Branco Marfim - Textos principais */
+  --card: #141A24; /* Azul Noturno Profundo - Fundo dos Cards */
+  --card-foreground: #F9F9F9;
+  --popover: #0B0E14;
+  --popover-foreground: #F9F9F9;
+  --primary: #D4AF37; /* Dourado Champanhe - Destaque Primário */
+  --primary-foreground: #0B0E14;
+  --secondary: #996515; /* Ouro Velho - Destaque Secundário */
+  --secondary-foreground: #F9F9F9;
+  --muted: #1E293B; /* Azul mais escuro para elementos muted */
+  --muted-foreground: #94A3B8; /* Cinza Azulado - Metadados */
+  --accent: #D4AF37; /* Dourado Champanhe - Acentuação */
+  --accent-foreground: #0B0E14;
+  --destructive: #F43F5E; /* Rose suave para destrutivo */
+  --border: #1E293B; /* Bordas azuis escuras */
+  --input: #1E293B;
+  --ring: #D4AF37; /* Anel dourado */
+  --sidebar: #0D1117; /* Fundo da Sidebar */
+  --sidebar-foreground: #F9F9F9;
+  --sidebar-primary: #D4AF37;
+  --sidebar-primary-foreground: #0D1117;
+  --sidebar-accent: #1E293B;
+  --sidebar-accent-foreground: #F9F9F9;
+  --sidebar-border: #1E293B;
+  --sidebar-ring: #D4AF37;
+
+  /* Variáveis do Design System Axé - Paleta "Ouro sobre Noite" */
+  --axe-page: #0B0E14;           /* Fundo global - Azul Petróleo */
+  --axe-sidebar: #0D1117;        /* Sidebar - Azul Noturno */
+  --axe-card: #141A24;           /* Cards padrão - Azul Noturno Profundo */
+  --axe-gold: #D4AF37;           /* Dourado Champanhe */
+  --axe-gold-secondary: #996515; /* Ouro Velho */
+  --axe-text-primary: #F9F9F9;   /* Branco Marfim */
+  --axe-text-muted: #94A3B8;     /* Cinza Azulado */
+  --axe-destructive: #F43F5E;    /* Rose suave para ações destrutivas */
+  --axe-gradient-members: linear-gradient(135deg, #1E293B 0%, #334155 50%, #1E293B 100%);
+  --axe-gradient-caboclo: linear-gradient(to bottom, #0D1117 0%, #1E293B 100%);
+  --axe-gradient-ogum: linear-gradient(to bottom, #996515 0%, #D4AF37 100%);
+  --axe-gradient-limpeza: linear-gradient(to bottom, #047857 0%, #10B981 100%);
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695); /* Preto suave #0F172A */
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.627 0.194 58.318); /* Dourado mantido */
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(0.279 0.041 260.031);
-  --input: oklch(0.279 0.041 260.031);
-  --ring: oklch(0.446 0.043 257.281);
-  --chart-1: oklch(0.488 0.243 302.717);
-  --chart-2: oklch(0.627 0.194 58.318);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 302.717);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(0.279 0.041 260.031);
-  --sidebar-ring: oklch(0.446 0.043 257.281);
+  --background: #0B0E14; /* Mantém o mesmo fundo escuro */
+  --foreground: #F9F9F9;
+  --card: #141A24;
+  --card-foreground: #F9F9F9;
+  --popover: #0B0E14;
+  --popover-foreground: #F9F9F9;
+  --primary: #D4AF37;
+  --primary-foreground: #0B0E14;
+  --secondary: #996515;
+  --secondary-foreground: #F9F9F9;
+  --muted: #1E293B;
+  --muted-foreground: #94A3B8;
+  --accent: #D4AF37;
+  --accent-foreground: #0B0E14;
+  --destructive: #F43F5E;
+  --border: #1E293B;
+  --input: #1E293B;
+  --ring: #D4AF37;
+  --chart-1: #D4AF37; /* Dourado para gráficos */
+  --chart-2: #996515; /* Ouro velho */
+  --chart-3: #1E293B; /* Azul escuro */
+  --chart-4: #94A3B8; /* Cinza azulado */
+  --chart-5: #F43F5E; /* Rose */
+  --sidebar: #0D1117;
+  --sidebar-foreground: #F9F9F9;
+  --sidebar-primary: #D4AF37;
+  --sidebar-primary-foreground: #0D1117;
+  --sidebar-accent: #1E293B;
+  --sidebar-accent-foreground: #F9F9F9;
+  --sidebar-border: #1E293B;
+  --sidebar-ring: #D4AF37;
+}
+
+/* Responsividade adicional */
+@media (max-width: 640px) {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Melhorar a legibilidade de textos longos */
+  .prose {
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+}
+
+/* Ajustes para telas muito pequenas (iPhone SE etc) */
+@media (max-width: 375px) {
+  .text-xs-mobile {
+    font-size: 0.65rem;
+  }
+  
+  .p-safe {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Garantir que imagens sejam responsivas */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Melhorar a experiência de toque em mobile */
+button, a {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Evitar zoom em inputs em iOS */
+@media (max-width: 768px) {
+  input, select, textarea {
+    font-size: 16px; /* Previne zoom no iOS */
+  }
+}
+
+/* Scrollbar mais fina em mobile */
+@media (max-width: 768px) {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  
+  /* Esconder scrollbar em navegadores WebKit */
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

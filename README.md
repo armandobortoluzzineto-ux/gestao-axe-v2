@@ -27,17 +27,94 @@ Sistema de gestão para comunidades religiosas, escalado para um modelo SaaS mul
   3. Confirmação e criação.
 - Integração com Supabase: cria organização e atualiza perfil do usuário com `organization_id` e `role='owner'`.
 
-### 3. Design System “Misticismo Moderno”
+### 3. Design System "Misticismo Moderno"
 - **Cores Primárias**: Roxo profundo (`#6D28D9`) para ações principais, Dourado (`#D97706`) para destaques.
 - **Tipografia**: Playfair Display (`font-serif`) para títulos, Inter (`font-sans`) para corpo.
 - **Componentes**: Botões, cards, inputs e selects estilizados com as variáveis CSS do tema.
+- **Cards de Eventos**: Design refinado com gradientes verticais suaves, tipografia heroica e badges suaves, seguindo critérios de harmonia visual e contraste.
+- **Dashboard Unificado**: Componente "Celebrações do Mês" que unifica aniversários e tempo de casa em uma única lista cronológica, com badges diferenciados (rosa para aniversários, dourado para tempo de casa) e scroll integrado.
 - **Consistência**: Todas as páginas (login, signup, onboarding, dashboard) seguem o mesmo padrão visual.
+
+### 4. Refatoração com Design System Global (Fevereiro 2026)
+Implementação de componentes reutilizáveis que preservam o layout aprovado enquanto substituem valores hardcoded por variáveis semânticas:
+
+#### Variáveis CSS do Design System Axé
+Adicionadas ao arquivo `src/app/globals.css`:
+- `--axe-page: #0F051D` (Fundo global)
+- `--axe-sidebar: #11052C` (Sidebar)
+- `--axe-card: #150a26` (Cards padrão)
+- `--axe-gold: #C5A059` (Dourado)
+- `--axe-purple: #7c3aed` (Roxo principal)
+- Gradientes temáticos para membros, caboclo, ogum e limpeza
+
+#### Componentes Criados
+1. **`<KPICard />`** (`src/components/dashboard/kpi-card.tsx`)
+   - Exibe métricas principais com gradiente vibrante e watermark
+   - Preserva layout aprovado: hierarquia visual, efeitos hover, textura de granulação
+   - Props: `value`, `label`, `icon`, `gradient`, `watermarkIcon`
+
+2. **`<EventStrip />`** (`src/components/dashboard/event-strip.tsx`)
+   - Exibe eventos com faixa lateral colorida (Date Strip)
+   - Mantém layout de 3 colunas com badges de hora e ícones temáticos
+   - Props: `title`, `date`, `day`, `time`, `location`, `type`, `month`
+
+3. **`<StandardCard />`** (`src/components/dashboard/standard-card.tsx`)
+   - Container padrão para conteúdo estruturado (Financeiro, Listas)
+   - Preserva fundo, bordas, header com ícone e glow dourado
+   - Props: `title`, `icon`, `children`, `actionButton`, `height`
+
+#### Padronização de Títulos de Cards (Fevereiro 2026)
+- Todos os títulos de cards (Financeiro, Próximos Eventos, Próximas Celebrações, Mural do Terreiro) seguem o mesmo formato visual:
+  - Fonte: Inter, tamanho `text-sm`, peso `font-bold`, cor `text-gray-200`, `uppercase`, `tracking-wider`
+  - Ícone com container dourado: `p-2 bg-[#C5A059]/10 rounded-lg flex items-center justify-center`
+  - Ícone: `w-5 h-5 text-[#C5A059]`
+- Garante consistência visual em todo o dashboard.
+
+#### Princípios de Implementação
+- **Preservação de Layout**: Geometria visual mantida idêntica aos cards aprovados
+- **Substituição de Hardcoded**: Cores hexadecimais → variáveis semânticas
+- **Reutilização**: Componentes encapsulam padrões visuais para uso futuro
+- **Documentação**: Atualizado `docs/DESIGN_SYSTEM.md` com exemplos de uso
 
 ### 4. Arquitetura SaaS
 - Banco de dados com tabelas `organizations` e `profiles`.
 - Row Level Security (RLS) habilitada para isolamento de dados por `organization_id`.
 - Migração SQL versionada (`supabase/migrations/20260209212041_setup_saas_multi_tenant.sql`).
 - Fluxo completo: signup → login → onboarding → dashboard.
+
+### 5. Responsividade Mobile-First (Fevereiro 2026)
+Implementação completa de design responsivo em toda a aplicação, seguindo abordagem mobile-first com Tailwind CSS:
+
+#### Breakpoints Padrão
+- **xs (extra small):** < 375px - Ajustes específicos para telas muito pequenas
+- **sm (small):** ≥ 640px - Smartphones em modo paisagem
+- **md (medium):** ≥ 768px - Tablets
+- **lg (large):** ≥ 1024px - Desktops
+
+#### Componentes Otimizados
+- **Dashboard:** Grid responsivo (`grid-cols-1 sm:grid-cols-2 lg:grid-cols-4`)
+- **Sidebar:** Padding e fontes escaláveis (`p-4 sm:p-6`, `text-sm sm:text-base`)
+- **Header:** Botões touch-friendly (`min-h-[44px]`), avatar visível em mobile
+- **Cards KPI:** Textos escaláveis (`text-5xl sm:text-6xl lg:text-7xl`)
+- **Páginas de autenticação:** Cards com largura responsiva (`max-w-xs xs:max-w-sm sm:max-w-md`)
+
+#### CSS Global para Mobile
+- **Touch-friendly:** Elementos interativos com altura mínima de 44px
+- **Prevenção de zoom iOS:** `font-size: 16px` em inputs
+- **Media queries específicas:** Para telas < 375px
+- **Scrollbars estilizadas:** Melhor experiência em mobile
+
+#### Componente Mobile Recados Drawer
+- **Localização:** `src/components/dashboard/mobile-recados-drawer.tsx`
+- **Funcionalidade:** Drawer lateral para feed de recados em dispositivos móveis
+- **Design:** Overlay escuro com animação slide-in, interface otimizada para toque
+
+#### Testes e Validação
+- Verificação com ferramentas de desenvolvedor (Chrome DevTools)
+- Testes em breakpoints padrão
+- Validação de TypeScript: `npx tsc --noEmit --skipLibCheck`
+
+Para detalhes completos sobre padrões de responsividade, consulte a seção 9 do [Design System](docs/DESIGN_SYSTEM.md#9-responsividade-e-mobile-first).
 
 ## Estrutura do Projeto
 
