@@ -18,7 +18,7 @@ export function StandardCard({
   actionButton,
   height = "auto",
   className,
-  showGoldGlow = true,
+  showGoldGlow = false,
 }: StandardCardProps) {
   // Determinar se a altura é um valor arbitrário (contém colchetes) ou uma classe Tailwind
   const isArbitraryHeight = height.startsWith('[') && height.endsWith(']');
@@ -26,13 +26,13 @@ export function StandardCard({
   return (
     <div
       className={cn(
-        "w-full bg-[var(--axe-card)] rounded-2xl p-4 sm:p-6 border border-white/5 flex flex-col justify-between relative overflow-hidden group",
+        "w-full bg-[var(--axe-card)] rounded-xl p-4 sm:p-6 border border-[var(--border-subtle)] flex flex-col justify-between relative overflow-hidden group shadow-sm",
         !isArbitraryHeight && `h-${height}`,
         className
       )}
       style={isArbitraryHeight ? { height: height.slice(1, -1) } : undefined}
     >
-      {/* Decoração de Fundo (Sutil) - Glow Dourado */}
+      {/* Decoração de Fundo (Sutil) - Glow Dourado opcional */}
       {showGoldGlow && (
         <div className="absolute top-0 right-0 w-40 h-40 sm:w-56 sm:h-56 lg:w-64 lg:h-64 bg-[var(--axe-gold)]/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
       )}
@@ -40,8 +40,8 @@ export function StandardCard({
       {/* Header do Card */}
       <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 sm:p-2 bg-[var(--axe-gold)]/10 rounded-lg flex items-center justify-center">
-            <div className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--axe-gold)] flex items-center justify-center">
+          <div className="p-1.5 sm:p-2 bg-[var(--axe-purple)]/10 rounded-lg flex items-center justify-center">
+            <div className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--axe-purple)] flex items-center justify-center">
               {icon}
             </div>
           </div>

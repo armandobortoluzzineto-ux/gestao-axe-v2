@@ -46,6 +46,13 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  /* Cores do Design System Axé */
+  --color-axe-page: var(--axe-page);
+  --color-axe-sidebar: var(--axe-sidebar);
+  --color-axe-card: var(--axe-card);
+  --color-axe-purple: var(--axe-purple);
+  --color-axe-gold: var(--axe-gold);
+  --color-axe-text-primary: var(--text-primary);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -57,80 +64,101 @@
 
 :root {
   --radius: 0.625rem;
-  --background: #0B0E14; /* Azul Petróleo quase preto - Fundo da Página */
-  --foreground: #F9F9F9; /* Branco Marfim - Textos principais */
-  --card: #141A24; /* Azul Noturno Profundo - Fundo dos Cards */
-  --card-foreground: #F9F9F9;
-  --popover: #0B0E14;
-  --popover-foreground: #F9F9F9;
-  --primary: #D4AF37; /* Dourado Champanhe - Destaque Primário */
-  --primary-foreground: #0B0E14;
-  --secondary: #996515; /* Ouro Velho - Destaque Secundário */
-  --secondary-foreground: #F9F9F9;
-  --muted: #1E293B; /* Azul mais escuro para elementos muted */
-  --muted-foreground: #94A3B8; /* Cinza Azulado - Metadados */
-  --accent: #D4AF37; /* Dourado Champanhe - Acentuação */
-  --accent-foreground: #0B0E14;
-  --destructive: #F43F5E; /* Rose suave para destrutivo */
-  --border: #1E293B; /* Bordas azuis escuras */
-  --input: #1E293B;
-  --ring: #D4AF37; /* Anel dourado */
-  --sidebar: #0D1117; /* Fundo da Sidebar */
-  --sidebar-foreground: #F9F9F9;
-  --sidebar-primary: #D4AF37;
-  --sidebar-primary-foreground: #0D1117;
-  --sidebar-accent: #1E293B;
-  --sidebar-accent-foreground: #F9F9F9;
-  --sidebar-border: #1E293B;
-  --sidebar-ring: #D4AF37;
+  /* Variáveis semânticas do Design System Axé - Light Mode (Roxo) */
+  --axe-page: #FFFFFF;           /* Fundo branco puro */
+  --axe-card: #FFFFFF;           /* Branco Puro */
+  --axe-sidebar: #2E1065;        /* Roxo Imperial Ultra-Escuro - Sidebar escura no modo claro */
+  --axe-purple: #6D28D9;         /* Roxo Real vibrante */
+  --axe-gold: #D97706;           /* Dourado referência #D97706 */
+  --text-primary: #0F172A;       /* Preto Azulado para leitura nítida */
+  --border-subtle: #E2E8F0;      /* Borda sutil cinza azulado */
 
-  /* Variáveis do Design System Axé - Paleta "Ouro sobre Noite" */
-  --axe-page: #0B0E14;           /* Fundo global - Azul Petróleo */
-  --axe-sidebar: #0D1117;        /* Sidebar - Azul Noturno */
-  --axe-card: #141A24;           /* Cards padrão - Azul Noturno Profundo */
-  --axe-gold: #D4AF37;           /* Dourado Champanhe */
-  --axe-gold-secondary: #996515; /* Ouro Velho */
-  --axe-text-primary: #F9F9F9;   /* Branco Marfim */
-  --axe-text-muted: #94A3B8;     /* Cinza Azulado */
-  --axe-destructive: #F43F5E;    /* Rose suave para ações destrutivas */
-  --axe-gradient-members: linear-gradient(135deg, #1E293B 0%, #334155 50%, #1E293B 100%);
-  --axe-gradient-caboclo: linear-gradient(to bottom, #0D1117 0%, #1E293B 100%);
-  --axe-gradient-ogum: linear-gradient(to bottom, #996515 0%, #D4AF37 100%);
+  /* Variáveis do sistema Shadcn (Light Mode) */
+  --background: var(--axe-page);
+  --foreground: var(--text-primary);
+  --card: var(--axe-card);
+  --card-foreground: var(--text-primary);
+  --popover: var(--axe-card);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--axe-purple);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--axe-gold);
+  --secondary-foreground: #FFFFFF;
+  --muted: #F3F4F6;
+  --muted-foreground: #6B7280;
+  --accent: var(--axe-purple);
+  --accent-foreground: #FFFFFF;
+  --destructive: #F43F5E;        /* Rose suave para ações destrutivas */
+  --border: var(--border-subtle);
+  --input: #FFFFFF;
+  --ring: var(--axe-purple);
+  --sidebar: var(--axe-sidebar);
+  --sidebar-foreground: #FFFFFF; /* Texto branco na sidebar escura */
+  --sidebar-primary: var(--axe-purple);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: var(--axe-gold);
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: var(--border-subtle);
+  --sidebar-ring: var(--axe-purple);
+
+  /* Variáveis semânticas para tipo "limpeza" */
+  --limpeza-bg: #059669;         /* bg-emerald-700 equivalente */
+  --limpeza-text: #34D399;       /* text-emerald-400 equivalente */
+  --limpeza-border: #10B981;     /* para bordas */
+
+  /* Gradientes (ajustados para light mode) */
+  --axe-gradient-members: linear-gradient(135deg, #FFFFFF 0%, #F1F5F9 50%, #FFFFFF 100%);
+  --axe-gradient-caboclo: linear-gradient(to bottom, #FFFFFF 0%, #F1F5F9 100%);
+  --axe-gradient-ogum: linear-gradient(to bottom, #D97706 0%, #B45309 100%);
   --axe-gradient-limpeza: linear-gradient(to bottom, #047857 0%, #10B981 100%);
 }
 
 .dark {
-  --background: #0B0E14; /* Mantém o mesmo fundo escuro */
-  --foreground: #F9F9F9;
-  --card: #141A24;
-  --card-foreground: #F9F9F9;
-  --popover: #0B0E14;
-  --popover-foreground: #F9F9F9;
-  --primary: #D4AF37;
+  /* Variáveis semânticas do Design System Axé - Dark Mode (Ouro sobre Noite) */
+  --axe-page: #0B0E14;
+  --axe-card: #141A24;
+  --axe-sidebar: #0D1117;
+  --axe-gold: #D97706;           /* Dourado referência #D97706 */
+  --text-primary: #F9F9F9;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+
+  /* Variáveis do sistema Shadcn (Dark Mode) */
+  --background: var(--axe-page);
+  --foreground: var(--text-primary);
+  --card: var(--axe-card);
+  --card-foreground: var(--text-primary);
+  --popover: var(--axe-page);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--axe-gold);
   --primary-foreground: #0B0E14;
-  --secondary: #996515;
-  --secondary-foreground: #F9F9F9;
+  --secondary: #996515;          /* Ouro velho (mantido para contraste) */
+  --secondary-foreground: var(--text-primary);
   --muted: #1E293B;
   --muted-foreground: #94A3B8;
-  --accent: #D4AF37;
+  --accent: var(--axe-gold);
   --accent-foreground: #0B0E14;
   --destructive: #F43F5E;
-  --border: #1E293B;
+  --border: var(--border-subtle);
   --input: #1E293B;
-  --ring: #D4AF37;
-  --chart-1: #D4AF37; /* Dourado para gráficos */
+  --ring: var(--axe-gold);
+  --chart-1: var(--axe-gold); /* Dourado para gráficos */
   --chart-2: #996515; /* Ouro velho */
   --chart-3: #1E293B; /* Azul escuro */
   --chart-4: #94A3B8; /* Cinza azulado */
   --chart-5: #F43F5E; /* Rose */
-  --sidebar: #0D1117;
-  --sidebar-foreground: #F9F9F9;
-  --sidebar-primary: #D4AF37;
+  --sidebar: var(--axe-sidebar);
+  --sidebar-foreground: var(--text-primary);
+  --sidebar-primary: var(--axe-gold);
   --sidebar-primary-foreground: #0D1117;
   --sidebar-accent: #1E293B;
-  --sidebar-accent-foreground: #F9F9F9;
-  --sidebar-border: #1E293B;
-  --sidebar-ring: #D4AF37;
+  --sidebar-accent-foreground: var(--text-primary);
+  --sidebar-border: var(--border-subtle);
+  --sidebar-ring: var(--axe-gold);
+
+  /* Variáveis semânticas para tipo "limpeza" (Dark Mode) */
+  --limpeza-bg: #065F46;         /* mais escuro */
+  --limpeza-text: #10B981;       /* mais claro */
+  --limpeza-border: #059669;     /* intermediário */
 }
 
 /* Responsividade adicional */

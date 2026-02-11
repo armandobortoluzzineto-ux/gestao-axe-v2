@@ -22,22 +22,36 @@ export function EventStrip({
   month,
   className,
 }: EventStripProps) {
-  // Determinar cores baseadas no tipo - Paleta "Ouro sobre Noite"
-  let bgColor = "bg-[var(--muted)]";
-  let hoverBorder = "hover:border-[#334155]/50";
-  let iconColor = "text-[var(--muted-foreground)]";
-  let gradientStyle = { backgroundImage: "var(--axe-gradient-caboclo)" };
+  // Determinar cores baseadas no tipo - Paleta clara
+  let bgColor = "bg-gray-50";
+  let hoverBorder = "hover:border-gray-300";
+  let iconColor = "text-gray-600";
+  let stripColor = "bg-gray-200";
+  let textColor = "text-gray-900";
+  let timeBg = "bg-gray-100";
+  let timeText = "text-gray-700";
   
   if (type === "ogum") {
-    bgColor = "bg-[var(--secondary)]";
-    hoverBorder = "hover:border-[var(--primary)]/50";
-    iconColor = "text-[var(--primary)]";
-    gradientStyle = { backgroundImage: "var(--axe-gradient-ogum)" };
+    stripColor = "bg-[#D97706]";
+    bgColor = "bg-[#D97706]/5";
+    hoverBorder = "hover:border-[#D97706]/30";
+    iconColor = "text-[#D97706]";
+    timeBg = "bg-[#D97706]/10";
+    timeText = "text-[#D97706]";
   } else if (type === "limpeza") {
-    bgColor = "bg-emerald-700";
-    hoverBorder = "hover:border-emerald-400/50";
-    iconColor = "text-emerald-400";
-    gradientStyle = { backgroundImage: "var(--axe-gradient-limpeza)" };
+    stripColor = "bg-emerald-600";
+    bgColor = "bg-emerald-50";
+    hoverBorder = "hover:border-emerald-300";
+    iconColor = "text-emerald-600";
+    timeBg = "bg-emerald-100";
+    timeText = "text-emerald-700";
+  } else if (type === "caboclo") {
+    stripColor = "bg-[#6D28D9]";
+    bgColor = "bg-[#6D28D9]/5";
+    hoverBorder = "hover:border-[#6D28D9]/30";
+    iconColor = "text-[#6D28D9]";
+    timeBg = "bg-[#6D28D9]/10";
+    timeText = "text-[#6D28D9]";
   }
   
   // Extrair dia e mês da data
@@ -46,7 +60,8 @@ export function EventStrip({
 
   return (
     <div className={cn(
-      "flex group rounded-xl bg-[var(--muted)]/40 border border-white/5 overflow-hidden h-full",
+      "flex group rounded-lg border border-gray-200 overflow-hidden h-full",
+      bgColor,
       hoverBorder,
       "transition-all",
       className
@@ -55,33 +70,34 @@ export function EventStrip({
       <div
         className={cn(
           "w-12 sm:w-16 md:w-20 flex flex-col items-center justify-center shrink-0",
+          stripColor,
           "group-hover:opacity-95 transition-colors"
         )}
-        style={gradientStyle}
       >
         <span className="text-xl sm:text-2xl font-bold text-white leading-none">{dayNumber}</span>
         <span className="text-[9px] sm:text-[10px] font-bold text-white/90 uppercase mt-0.5 sm:mt-1 tracking-wider">{monthAbbr}</span>
       </div>
       
       {/* Conteúdo */}
-      <div className="p-2 sm:p-3 flex flex-col justify-center w-full relative">
-        {/* Badge de Hora */}
-        <div className={cn(
-          "absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-white/5 text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded text-[var(--primary)]/60 border border-[var(--primary)]/20",
-          "group-hover:bg-white/10 group-hover:text-[var(--primary)]/80 transition-colors"
-        )}>
-          {time}
-        </div>
-
-        <span className="text-white font-bold leading-tight line-clamp-1 mb-0.5 sm:mb-1 text-sm sm:text-base">{title}</span>
-        <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-[var(--muted-foreground)] group-hover:text-gray-300">
-          <MapPin className={cn("w-2.5 h-2.5 sm:w-3 sm:h-3", iconColor)} />
+      <div className="p-3 sm:p-4 flex flex-col justify-center w-full">
+        <span className={cn("font-bold leading-tight line-clamp-1 mb-1 sm:mb-2 text-sm sm:text-base", textColor)}>{title}</span>
+        <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600 mb-1 sm:mb-2">
+          <MapPin className={cn("w-3 h-3 sm:w-4 sm:h-4", iconColor)} />
           <span className="truncate">{location}</span>
         </div>
         
-        {/* Dia da semana (opcional) */}
-        <div className="mt-0.5 sm:mt-1 text-[9px] sm:text-[10px] text-[var(--muted-foreground)]/70 font-medium">
-          {day}
+        {/* Linha com horário e dia da semana */}
+        <div className="flex items-center justify-between mt-auto">
+          <div className="text-[10px] sm:text-xs text-gray-500 font-medium">
+            {day}
+          </div>
+          <div className={cn(
+            "text-[10px] sm:text-xs px-2 py-1 rounded-md font-medium",
+            timeBg,
+            timeText
+          )}>
+            {time}
+          </div>
         </div>
       </div>
     </div>

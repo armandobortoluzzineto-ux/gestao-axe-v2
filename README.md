@@ -201,6 +201,19 @@ O sistema agora inclui um menu lateral responsivo que se adapta a dispositivos m
 2. O drawer abrirá com as opções de navegação.
 3. Toque em qualquer opção para navegar ou toque fora do drawer para fechar.
 
+## Correções de Layout
+
+### Botão de enviar no mural (Fevereiro 2026)
+
+O botão de enviar mensagem no mural (sidebar direita e mobile drawer) estava com problemas de alinhamento vertical e sobreposição de texto. Foram realizados os seguintes ajustes:
+
+- **Aumento do padding direito** do input (`pr-14`) para garantir espaço adequado.
+- **Botão com tamanho fixo** (`w-10 h-10`) e ícone centralizado (`flex items-center justify-center`).
+- **Posicionamento refinado** (`right-3`, `top-1/2`, `-translate-y-1/2`) para alinhamento vertical preciso.
+- **Ícone maior** (`w-5 h-5`) para melhor visibilidade.
+
+Essas alterações garantem que o texto digitado não fique atrás do botão e que o ícone fique perfeitamente centralizado, seguindo os princípios do Design System.
+
 ## Solução de Problemas
 
 ### Erro de TypeScript ao construir no Vercel

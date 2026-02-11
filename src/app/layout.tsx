@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 import "./globals.css";
 
 const inter = Inter({
@@ -23,14 +24,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang="pt-BR" className={`${inter.variable} ${playfair.variable}`} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </head>
       <body className="font-sans antialiased min-h-screen bg-background text-foreground">
-        <div className="min-h-screen flex flex-col">
-          {children}
-        </div>
+        <ThemeProvider attribute="class" defaultTheme="light">
+          <div className="min-h-screen flex flex-col">
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

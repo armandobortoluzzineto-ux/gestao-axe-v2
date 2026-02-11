@@ -62,19 +62,19 @@ export default function Avatar({
   // Gradientes baseados no Design System
   const gradientClasses = {
     default: "bg-gradient-to-br from-primary/50 to-accent/50",
-    purple: "bg-gradient-to-br from-[#6D28D9]/60 to-[#7C3AED]/60",
-    gold: "bg-gradient-to-br from-[#D97706]/60 to-[#F59E0B]/60",
-    green: "bg-gradient-to-br from-[#047857]/60 to-[#10B981]/60",
-    blue: "bg-gradient-to-br from-[#1D4ED8]/60 to-[#3B82F6]/60",
+    purple: "bg-gradient-to-br from-axe-purple/60 to-axe-purple/80",
+    gold: "bg-gradient-to-br from-axe-gold/60 to-axe-gold/80",
+    green: "bg-gradient-to-br from-[var(--limpeza-bg)]/60 to-[var(--limpeza-text)]/60",
+    blue: "bg-gradient-to-br from-blue-600/60 to-blue-500/60",
   };
 
   // Cores de texto para contraste
   const textColorClasses = {
     default: "text-primary",
-    purple: "text-[#7C3AED]",
-    gold: "text-[#D97706]",
-    green: "text-[#10B981]",
-    blue: "text-[#3B82F6]",
+    purple: "text-axe-purple",
+    gold: "text-axe-gold",
+    green: "text-[var(--limpeza-text)]",
+    blue: "text-blue-500",
   };
 
   const sizeClass = sizeClasses[size];
@@ -101,7 +101,7 @@ export default function Avatar({
           onError={() => setHasError(true)}
         />
       ) : (
-        <div className="w-full h-full flex items-center justify-center bg-[#0F051D]/80">
+        <div className="w-full h-full flex items-center justify-center bg-axe-sidebar/80">
           {/* Conteúdo de fallback */}
           {icon ? (
             <div className={cn("flex items-center justify-center", textColorClass)}>
@@ -148,7 +148,7 @@ export function AvatarGroup({
       {avatarsToShow.map((avatar, index) => (
         <div
           key={index}
-          className="rounded-full border-2 border-[#0F051D]"
+          className="rounded-full border-2 border-axe-sidebar"
           style={{ marginLeft: index > 0 ? `${spacing}px` : "0" }}
         >
           <Avatar
@@ -162,7 +162,7 @@ export function AvatarGroup({
       {remaining > 0 && (
         <div
           className={cn(
-            "rounded-full flex items-center justify-center border-2 border-[#0F051D] bg-[#1E1B4B] text-white",
+            "rounded-full flex items-center justify-center border-2 border-axe-sidebar bg-axe-sidebar text-white",
             size === "sm" && "w-8 h-8 text-xs",
             size === "md" && "w-10 h-10 text-sm",
             size === "lg" && "w-12 h-12 text-base"

@@ -3,7 +3,7 @@ import { createClient as createClientServer } from "@/lib/supabase/server";
 import Sidebar from "@/components/dashboard/sidebar";
 import Header from "@/components/dashboard/header";
 
-export default async function DashboardLayout({
+export default async function AuthenticatedLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -48,7 +48,7 @@ export default async function DashboardLayout({
       </aside>
 
       {/* Conteúdo Central */}
-      <div className="flex-1 flex flex-col w-full bg-[#0F051D] overflow-hidden">
+      <div className="flex-1 flex flex-col w-full bg-background overflow-hidden">
         <main className="flex-1 w-full h-full">
           {children}
         </main>

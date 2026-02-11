@@ -19,7 +19,7 @@ export default function AvatarExample() {
   ];
 
   return (
-    <div className="p-6 bg-[#0F051D] rounded-2xl border border-white/10">
+    <div className="p-6 bg-axe-sidebar rounded-2xl border border-white/10">
       <h2 className="text-xl font-bold text-white mb-6 font-serif">Exemplos de Avatar</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -66,19 +66,19 @@ export default function AvatarExample() {
           
           <div className="text-sm text-gray-400 space-y-1">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#6D28D9]"></div>
+              <div className="w-3 h-3 rounded-full bg-axe-purple"></div>
               <span>Purple: Administradores</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#D97706]"></div>
+              <div className="w-3 h-3 rounded-full bg-axe-gold"></div>
               <span>Gold: Destaques, aniversários</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#10B981]"></div>
+              <div className="w-3 h-3 rounded-full bg-[var(--limpeza-text)]"></div>
               <span>Green: Novos membros</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-[#3B82F6]"></div>
+              <div className="w-3 h-3 rounded-full bg-blue-500"></div>
               <span>Blue: Convidados</span>
             </div>
           </div>
@@ -154,7 +154,7 @@ export default function AvatarExample() {
       <div className="mt-8 pt-6 border-t border-white/10">
         <h3 className="text-lg font-semibold text-gray-300 mb-4">Exemplo de uso real</h3>
         
-        <div className="bg-[#1E1B4B]/30 p-4 rounded-xl border border-white/5">
+        <div className="bg-axe-sidebar/30 p-4 rounded-xl border border-white/5">
           <div className="flex items-center gap-3 mb-4">
             <Avatar name="Maria Silva" size="md" gradient="purple" />
             <div>

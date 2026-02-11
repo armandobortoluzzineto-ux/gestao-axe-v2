@@ -48,10 +48,10 @@ export function MobileRecadosDrawer({ recados, isOpen, onClose }: MobileRecadosD
       {/* Drawer */}
       <div className="fixed right-0 top-0 h-full w-full max-w-sm bg-[var(--axe-sidebar)] z-50 lg:hidden flex flex-col shadow-2xl border-l border-white/10 animate-slide-in-right">
         {/* Cabeçalho */}
-        <div className="p-4 border-b border-white/10 bg-[#11052C] flex items-center justify-between sticky top-0">
+        <div className="p-4 border-b border-white/10 bg-axe-sidebar flex items-center justify-between sticky top-0">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-[#C5A059]/10 rounded-lg flex items-center justify-center">
-              <MessageSquare className="w-5 h-5 text-[#C5A059]" />
+            <div className="p-2 bg-axe-gold/10 rounded-lg flex items-center justify-center">
+              <MessageSquare className="w-5 h-5 text-axe-gold" />
             </div>
             <div>
               <h3 className="text-base font-bold text-gray-200">Mural do Terreiro</h3>
@@ -84,7 +84,7 @@ export function MobileRecadosDrawer({ recados, isOpen, onClose }: MobileRecadosD
                   <span className="text-xs font-medium text-gray-300">{recado.autor}</span>
                   <span className="text-[10px] text-gray-500">{recado.hora}</span>
                 </div>
-                <div className="bg-[#1E1B4B] p-3 rounded-2xl rounded-tl-none border border-white/5 text-sm text-gray-200">
+                <div className="bg-axe-sidebar p-3 rounded-2xl rounded-tl-none border border-white/5 text-sm text-gray-200">
                   <p className="leading-snug break-words">{recado.texto}</p>
                 </div>
               </div>
@@ -101,21 +101,21 @@ export function MobileRecadosDrawer({ recados, isOpen, onClose }: MobileRecadosD
         </div>
 
         {/* Área de input */}
-        <div className="p-4 border-t border-white/10 bg-[#11052C] sticky bottom-0">
-          <div className="relative">
+        <div className="p-4 border-t border-white/10 bg-axe-sidebar sticky bottom-0">
+          <div className="flex items-center gap-3">
             <input
               type="text"
               value={mensagem}
               onChange={(e) => setMensagem(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Digite uma mensagem..."
-              className="w-full bg-[#0F051D] text-sm text-white rounded-full pl-4 pr-12 py-3 border border-white/10 focus:outline-none focus:border-[#C5A059]/50 placeholder-gray-500"
+              className="flex-1 bg-axe-sidebar text-sm text-white rounded-full pl-4 pr-4 py-3 border border-white/10 focus:outline-none focus:border-axe-gold/50 placeholder-gray-500"
               autoFocus
             />
             <button
               onClick={handleEnviarMensagem}
               disabled={!mensagem.trim()}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-[#C5A059] rounded-full text-[#11052C] hover:bg-[#DFC07A] transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="shrink-0 flex items-center justify-center w-9 h-9 bg-axe-gold rounded-full text-axe-sidebar hover:bg-axe-gold/80 transition disabled:opacity-50 disabled:cursor-not-allowed p-0 leading-none"
               aria-label="Enviar mensagem"
             >
               <Send className="w-4 h-4" />

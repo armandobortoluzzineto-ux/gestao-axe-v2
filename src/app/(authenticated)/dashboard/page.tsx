@@ -96,15 +96,15 @@ export default function DashboardPage() {
          <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
             
             {/* Cabeçalho da Página */}
-            <header className="mb-10 sm:mb-12">
-               <h1 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">Bem-vindo, {userName}!</h1>
-               <p className="text-gray-400 text-xs sm:text-sm">
+            <header className="mb-6 sm:mb-8">
+               <h1 className="text-xl sm:text-2xl font-bold text-[var(--axe-text-primary)] mb-2 sm:mb-3">Bem-vindo, {userName}!</h1>
+               <p className="text-[var(--muted-foreground)] text-xs sm:text-sm">
                  Hoje é {new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
                </p>
             </header>
 
             {/* O GRID DE 4 COLUNAS (Bento Grid) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-7 md:gap-9">
                
                {/* Card Destaque: Membros Ativos usando KPICard */}
                <KPICard 
@@ -114,20 +114,24 @@ export default function DashboardPage() {
                />
 
                {/* B. Próximos Eventos (Grid Horizontal - 3 Colunas) */}
-               <div className="col-span-1 sm:col-span-2 lg:col-span-3 bg-[var(--axe-card)] rounded-2xl p-4 sm:p-6 border border-white/5 flex flex-col justify-between h-full min-h-[140px] sm:min-h-[160px] lg:min-h-[180px]">
+               <div className="col-span-1 sm:col-span-2 lg:col-span-3 bg-[var(--axe-card)] rounded-2xl p-4 sm:p-6 border border-[var(--border-subtle)] flex flex-col justify-between h-full min-h-[140px] sm:min-h-[160px] lg:min-h-[180px] shadow-sm hover:shadow transition-shadow duration-300">
                   
-                  {/* Header: Alinhado com o topo do card vizinho */}
-                  <div className="flex items-center gap-2 mb-3 sm:mb-4">
-                     <div className="p-1.5 sm:p-2 bg-[var(--axe-gold)]/10 rounded-lg flex items-center justify-center">
-                        <CalendarDays className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--axe-gold)]" />
+                  {/* Header: Padronizado com StandardCard (ícone dourado) */}
+                  <div className="flex items-center justify-between mb-3 sm:mb-4 relative z-10">
+                     <div className="flex items-center gap-2">
+                        <div className="p-1.5 sm:p-2 bg-[var(--axe-purple)]/10 rounded-lg flex items-center justify-center">
+                           <div className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--axe-purple)] flex items-center justify-center">
+                              <CalendarDays className="w-4 h-4 sm:w-5 sm:h-5" />
+                           </div>
+                        </div>
+                        <span className="text-xs sm:text-sm font-bold text-[var(--axe-text-primary)] uppercase tracking-wider">
+                           Próximos Eventos
+                        </span>
                      </div>
-                     <span className="text-xs sm:text-sm font-bold text-[var(--axe-text-primary)] uppercase tracking-wider">
-                        Próximos Eventos
-                     </span>
                   </div>
 
                   {/* A Grid Interna (3 Colunas) - Usando EventStrip */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 flex-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 flex-1">
                     {proximosRituais.map((ritual) => (
                       <EventStrip
                         key={ritual.id}
@@ -220,7 +224,7 @@ export default function DashboardPage() {
                        const mesNome = meses[parseInt(mes) - 1] || 'Fevereiro';
                        
                        return (
-                       <div key={evento.id} className="flex items-center justify-between p-3 rounded-xl bg-[var(--muted)]/30 border border-white/5 hover:bg-[var(--muted)]/50 transition-all group">
+                       <div key={evento.id} className="flex items-center justify-between p-3 rounded-xl bg-[var(--muted)]/30 border border-white/5 hover:bg-[var(--muted)]/50 hover:shadow-sm hover:border-[var(--axe-gold)]/20 transition-all duration-300 group">
                           <div className="flex items-center gap-3">
                              {/* Avatar */}
                              <Avatar
@@ -230,7 +234,7 @@ export default function DashboardPage() {
                                bordered={false}
                              />
                              <div className="flex flex-col">
-                                <span className="text-sm font-bold text-white group-hover:text-pink-200">{evento.nome}</span>
+                                <span className="text-sm font-bold text-[var(--axe-text-primary)] group-hover:text-[var(--axe-purple)]">{evento.nome}</span>
                                 <span className="text-xs text-[var(--axe-text-muted)]">{dia} {mesNome}</span>
                              </div>
                           </div>
@@ -252,8 +256,8 @@ export default function DashboardPage() {
       </main>
 
       {/* 3. FEED DE RECADOS (Direita - Coluna Fixa) - Oculto em mobile */}
-      <aside className="hidden lg:flex w-80 h-full bg-[var(--axe-sidebar)] border-l border-white/5 flex flex-col shrink-0">
-         <div className="p-6 border-b border-white/5 sticky top-0 bg-[var(--axe-sidebar)] z-10 flex justify-between items-center">
+      <aside className="hidden lg:flex w-80 h-full bg-[var(--axe-card)] border-l border-[var(--border-subtle)] flex flex-col shrink-0">
+         <div className="p-6 border-b border-[var(--border-subtle)] sticky top-0 bg-[var(--axe-card)] z-10 flex justify-between items-center">
             <div className="flex items-center gap-2">
                <div className="p-2 bg-[var(--axe-gold)]/10 rounded-lg flex items-center justify-center">
                   <MessageSquare className="w-5 h-5 text-[var(--axe-gold)]" />
@@ -286,7 +290,7 @@ export default function DashboardPage() {
                     </span>
 
                     {/* O Balão em si */}
-                    <div className="bg-[var(--muted)] p-3 rounded-2xl rounded-tl-none border border-white/5 text-sm text-[var(--axe-text-primary)] shadow-sm relative group hover:bg-[var(--muted)]/80 transition-colors">
+                    <div className="bg-[var(--muted)] p-3 rounded-2xl rounded-tl-none border border-[var(--border-subtle)] text-sm text-[var(--axe-text-primary)] shadow-sm relative group hover:bg-[var(--muted)]/80 transition-colors">
                        <p className="leading-snug break-words whitespace-normal text-wrap">
                           {recado.texto}
                        </p>
@@ -301,14 +305,14 @@ export default function DashboardPage() {
          </div>
 
          {/* Área de Input (Rodapé Fixo) */}
-         <div className="p-6 bg-[var(--axe-sidebar)] border-t border-white/5 sticky bottom-0">
-            <div className="relative">
+         <div className="p-6 bg-[var(--axe-card)] border-t border-[var(--border-subtle)] sticky bottom-0">
+            <div className="flex items-center gap-3">
                <input
                   type="text"
                   placeholder="Digite uma mensagem..."
-                  className="w-full bg-[var(--axe-page)] text-sm text-white rounded-full pl-4 pr-12 py-3.5 border border-white/10 focus:outline-none focus:border-[var(--axe-gold)]/50 placeholder-gray-500"
+                  className="flex-1 bg-[var(--axe-page)] text-sm text-[var(--axe-text-primary)] rounded-full pl-4 pr-4 py-3 border border-[var(--border-subtle)] focus:outline-none focus:border-[var(--axe-gold)]/50 placeholder-[var(--muted-foreground)]"
                />
-               <button className="absolute right-3 top-1/2 -translate-y-1/2 p-2 bg-[var(--axe-gold)] rounded-full text-[var(--axe-sidebar)] hover:bg-[var(--axe-gold)]/80 transition shadow-md">
+               <button className="shrink-0 flex items-center justify-center w-9 h-9 bg-[var(--axe-gold)] rounded-full text-white hover:bg-[var(--axe-gold)]/80 transition shadow-md p-0 leading-none">
                   <Send className="w-4 h-4" />
                </button>
             </div>

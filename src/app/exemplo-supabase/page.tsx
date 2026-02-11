@@ -15,21 +15,21 @@ export default async function ExemploSupabasePage() {
       <h1 className="text-3xl font-bold mb-6">Exemplo de Integração Supabase</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <section className="bg-slate-50 p-6 rounded-xl shadow">
+        <section className="bg-muted p-6 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-4">Dados do Servidor</h2>
           <p className="mb-4">
             Esta lista é carregada no servidor (Server Component) usando
-            <code className="bg-slate-200 px-2 py-1 rounded">createClientServer()</code>.
+            <code className="bg-muted/50 px-2 py-1 rounded">createClientServer()</code>.
           </p>
-          <pre className="bg-slate-900 text-slate-100 p-4 rounded-lg overflow-auto text-sm">
+          <pre className="bg-axe-sidebar text-white p-4 rounded-lg overflow-auto text-sm">
             {JSON.stringify(serverData || [], null, 2)}
           </pre>
-          <p className="mt-4 text-sm text-slate-600">
+          <p className="mt-4 text-sm text-muted-foreground">
             Total de registros: {serverData?.length || 0}
           </p>
         </section>
 
-        <section className="bg-white border border-slate-200 p-6 rounded-xl shadow">
+        <section className="bg-card border border-border p-6 rounded-xl shadow">
           <h2 className="text-xl font-semibold mb-4">Interação no Cliente</h2>
           <p className="mb-4">
             No cliente, use <code>createClientBrowser()</code> para operações
@@ -37,7 +37,7 @@ export default async function ExemploSupabasePage() {
           </p>
           <div className="space-y-4">
             <button
-              className="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition"
+              className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80 transition"
               onClick={async () => {
                 // Exemplo de chamada no cliente
                 const supabase = createClientBrowser();
@@ -50,7 +50,7 @@ export default async function ExemploSupabasePage() {
             >
               Simular Login com OTP
             </button>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-muted-foreground">
               Este botão executa no navegador usando o cliente Supabase do
               lado do cliente.
             </p>
@@ -58,12 +58,12 @@ export default async function ExemploSupabasePage() {
         </section>
       </div>
 
-      <div className="mt-12 p-6 bg-gradient-to-r from-slate-100 to-slate-200 rounded-2xl">
+      <div className="mt-12 p-6 bg-gradient-to-r from-muted to-muted/80 rounded-2xl">
         <h3 className="text-2xl font-bold mb-4">Próximos Passos</h3>
         <ul className="list-disc pl-6 space-y-2">
           <li>
             Gere os tipos reais do seu banco com:{" "}
-            <code className="bg-slate-800 text-white px-2 py-1 rounded">
+            <code className="bg-primary text-white px-2 py-1 rounded">
               npx supabase gen types typescript --project-id seu-project-id
             </code>
           </li>

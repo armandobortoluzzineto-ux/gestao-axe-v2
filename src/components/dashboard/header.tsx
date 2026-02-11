@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, Menu, User, X } from "lucide-react";
+import { LogOut, Menu, User, X, Bell, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Avatar from "@/components/ui/avatar";
 import { useRouter } from "next/navigation";
@@ -65,7 +65,7 @@ export default function Header() {
       <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border bg-background px-3 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 shadow-sm">
         <div className="flex items-center gap-2 sm:gap-3">
           <button
-            className="lg:hidden p-1.5 sm:p-2 rounded-md hover:bg-muted transition-colors"
+            className="lg:hidden p-1.5 sm:p-2 rounded-md hover:bg-muted transition-all duration-300 hover:shadow-sm"
             onClick={toggleSidebar}
           >
             <Menu className="h-4 w-4 sm:h-5 sm:w-5 text-foreground" />
@@ -77,6 +77,14 @@ export default function Header() {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Ícones de notificação e configurações */}
+          <button className="p-1.5 sm:p-2 rounded-md hover:bg-gray-100 transition-all duration-300 text-gray-600 hover:text-gray-900 hover:shadow-sm">
+            <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
+          </button>
+          <button className="p-1.5 sm:p-2 rounded-md hover:bg-gray-100 transition-all duration-300 text-gray-600 hover:text-gray-900 hover:shadow-sm">
+            <Settings className="h-4 w-4 sm:h-5 sm:w-5" />
+          </button>
+
           {/* Avatar e nome visíveis em tablets+ */}
           <div className="flex items-center gap-2 sm:gap-3 text-sm text-foreground">
             {loading ? (
@@ -121,7 +129,7 @@ export default function Header() {
             className="fixed inset-0 bg-black/50 z-40 lg:hidden"
             onClick={toggleSidebar}
           />
-          <div className="fixed inset-y-0 left-0 w-64 max-w-[80%] bg-sidebar border-r border-border z-50 lg:hidden overflow-y-auto">
+          <div className="fixed inset-y-0 left-0 w-64 max-w-[85%] min-w-[240px] bg-sidebar border-r border-border z-50 lg:hidden overflow-y-auto">
             <div className="flex items-center justify-between p-4 border-b border-border">
               <h2 className="text-lg font-bold font-serif">Menu</h2>
               <button
